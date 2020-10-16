@@ -87,6 +87,7 @@
     getElements(){
       const thisProduct = this;
       
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
@@ -177,8 +178,23 @@
           /* deduct price of option from price */
             price -= option.price;
           }
+
+          /*  find the class name for the image */
+          let optionImageClass = '.' + paramId + '-' + optionId; 
+
+          /* find the image class you want to change */
+          let chosenOptionImage = thisProduct.imageWrapper.querySelector(optionImageClass);
+          
+          /* if chosenOptionImage exists add active class to selected options remove from not selected */
+          if(chosenOptionImage != null){
+            if(optionSelected){
+              chosenOptionImage.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+              chosenOptionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
           /* END ELSE IF: if option is not selected and option is default */
-        /* END LOOP: for each optionId in param.options */
+          /* END LOOP: for each optionId in param.options */
         }
       /* END LOOP: for each paramId in thisProduct.data.params */
       }

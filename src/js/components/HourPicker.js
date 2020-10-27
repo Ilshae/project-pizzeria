@@ -4,18 +4,19 @@ import {BaseWidget} from './BaseWidget.js';
 
 export class HourPicker extends BaseWidget{
   constructor(wrapper){
-    super(wrapper, settings.hours.open);
+    super(wrapper, utils.numberToHour(settings.hours.open));
     const thisWidget = this;
     
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.input);
     thisWidget.dom.output = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.output);
-    thisWidget.dom.output.innerHTML = thisWidget.parseValue(thisWidget.value);
-    thisWidget.initPlugin();
     
+    thisWidget.initPlugin();
+    thisWidget.dom.output.innerHTML = thisWidget.correctValue;
   }
 
   initPlugin(){
     const thisWidget = this;
+    // eslint-disable-next-line
     rangeSlider.create(thisWidget.dom.input);
 
     thisWidget.dom.input.addEventListener('input', function(){
@@ -23,8 +24,9 @@ export class HourPicker extends BaseWidget{
     });
   }
 
-  parseValue(Value){
-    return utils.numberToHour(Value);
+  parseValue(newValue){
+    const parsedValue = utils.numberToHour(newValue);
+    return parsedValue;
   }
 
   isValid(){
@@ -33,7 +35,6 @@ export class HourPicker extends BaseWidget{
 
   renderValue(){
     const thisWidget = this;
-    thisWidget.dom.output.innerHTML = thisWidget.value; // to zmienia html
-    console.log('thisWidget.value', thisWidget.value);
+    thisWidget.dom.output.innerHTML = thisWidget.value;    
   }
 }

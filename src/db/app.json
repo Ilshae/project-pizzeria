@@ -258,8 +258,8 @@
   "booking": [
     {
       "id": 6,
-      "date": "2020-10-28",
-      "hour": "11:30",
+      "date": "2020-10-27",
+      "hour": "12:00",
       "table": 1,
       "repeat": false,
       "duration": 4,

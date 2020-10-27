@@ -33,14 +33,10 @@ export class CartProduct{
 
   initAmountWidget(){
     const thisCartProduct = this;
-
     thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
-    
-    thisCartProduct.amountWidget.element.addEventListener('click', function(){
+    thisCartProduct.amountWidget.dom.wrapper.addEventListener('updated', function(){
       thisCartProduct.amount = thisCartProduct.amountWidget.value;
-      console.log('thisCartProduct.amount', thisCartProduct.amount);
       thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
-
       thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
     });
   }
@@ -60,7 +56,7 @@ export class CartProduct{
 
   initActions(){
     const thisCartProduct = this;
-    thisCartProduct.dom.edit.addEventListener('click', function(){
+    thisCartProduct.dom.edit.addEventListener('click', function(event){
       event.preventDefault();
     });
 

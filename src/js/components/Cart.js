@@ -75,14 +75,9 @@ export class Cart{
     for(let product of thisCart.products){
       thisCart.subtotalPrice += product.price;
       thisCart.totalNumber = product.amount;
-
-      
-      /* KOD PONIŻEJ LICZY DOBRZE 
-      thisCart.subtotalPrice += product.priceSingle * product.amountWidget.value;
-      thisCart.totalNumber = product.amountWidget.value;
-      console.log('product', product);
-      console.log('product.amount', product.amount);
-      console.log('product.amountWidget.value', product.amountWidget.value);*/
+      //console.log('product', product);
+      //console.log('product.amount', product.amount);
+      //console.log('product.amountWidget.value', product.amountWidget.value);
     }
 
     thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;

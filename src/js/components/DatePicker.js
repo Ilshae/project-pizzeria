@@ -8,38 +8,35 @@ export class DatePicker extends BaseWidget{
     const thisWidget = this;
 
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.datePicker.input);
+
+    thisWidget.dom.input.value = utils.dateToStr(new Date);
+    
     thisWidget.initPlugin();
   }
 
   initPlugin(){
     const thisWidget = this;
-    thisWidget.minDate = new Date(thisWidget.value);
 
+    thisWidget.minDate = new Date(thisWidget.value);
     const maxDateCounter = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
     thisWidget.maxDate = new Date(maxDateCounter);
-
-    const fpOptions = {
+  
+    // eslint-disable-next-line
+    flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
-      'disable': [
-        function(date) {
-          // return true to disable
-          return (date.getDay() === 1);
-        }
+      locale: {
+        firstDayOfWeek: 1,
+      },
+      disable: [
+        function (date) {       
+          return date.getDay() === 1;
+        },
       ],
-      'locale': {
-        'firstDayOfWeek': 1
-      }  
-    };
-    
-    // eslint-disable-next-line
-    const fp = flatpickr(thisWidget.dom.input, fpOptions);
-    fp.input.value = utils.dateToStr(new Date(Date.now()));
-
-    //fp.input.value = utils.dateToStr(Date.now());
-    fp.config.onChange.push(function(dateStr){
-      thisWidget.value = utils.dateToStr(new Date(dateStr));
+      onChange: function (selectedDates, dateStr) {
+        thisWidget.value = dateStr;
+      },
     });
   }
 

@@ -108,8 +108,8 @@ export class Cart{
     const url = settings.db.url + '/' + settings.db.order;
 
     const payload = {
-      phone: thisCart.phone,
-      address: thisCart.address,
+      phone: thisCart.phone.value,
+      address: thisCart.address.value,
       totalPrice: thisCart.totalPrice,
       totalNumber: thisCart.totalNumber,
       subtotalPrice: thisCart.subtotalPrice,

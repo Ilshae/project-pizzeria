@@ -9,6 +9,7 @@
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,6 +22,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -62,6 +64,9 @@
   </header>
 
   <div id="pages">
+    <section id="home">
+      <div class="home-wrapper container"></div>
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -69,6 +74,121 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+
+  <script id="template-home-page" type="text/x-handlebars-template">
+    <div class="main-wrapper">
+      <section>
+        <div class="row">
+          <div class="tile-wrapper order-link">
+            <a href="#order" class="link">
+              <h1 class="h1">Order online</h1>
+              <p>Delicious food delivered to your door</p>
+            </a> 
+          </div>
+          <div class="tile-wrapper booking-link">
+            <a href="#booking" class="link">
+              <h1 class="h1">Book a table</h1>
+              <p>Let's meet!</p>
+            </a>
+          </div>
+        </div>
+        <div class="opening-wrapper">
+          <h1 class="h1">Opening hours:</h1>
+          <p>tue-sun, 12pm - 12am</p>
+        </div>
+      </section>
+      <section class="opinions-slider js-flickity" data-flickity-options='{ "cellAlign": "center", "contain": true, "autoPlay": true, "prevNextButtons": false }'>          
+        <article class="slide">
+          <div class="image">
+            <img src="images/home/pizza-3.jpg" alt="pizzeria">
+          </div>
+          <div class="text">
+            <h2 class="h2">Amazing service!</h2>
+            <p class="opinion">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.
+            </p>
+            <p class="signature">- Margaret Osborne</p>  
+          </div>  
+        </article>
+        <article class="slide">
+          <div class="image">
+            <img src="images/home/pizza-3.jpg" alt="pizzeria">
+          </div>
+          <div class="text">
+            <h2 class="h2">I love this place!</h2>
+            <p class="opinion">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.
+            </p>
+            <p class="signature">- Myles Mccallum</p>  
+          </div>
+        </article>
+        <article class="slide">
+          <div class="image">
+            <img src="images/home/pizza-3.jpg" alt="pizzeria">
+          </div>
+          <div class="text">
+            <h2 class="h2">The best Italian pizza!</h2>
+            <p class="opinion">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.
+            </p>
+            <p class="signature">- Isaiah Sumner</p>  
+          </div>
+        </article>   
+      </section>
+      <section class="gallery">
+        <div class="row">
+          <div class="image-wrapper">
+            <img src="images/home/pizza-4.jpg" alt="pizza-4">
+            <div class="icon-wrapper">
+              <a class="icon" href="#"><i class="fas fa-heart"></i></a>
+              <a class="icon" href="#"><i class="fas fa-share-alt"></i></a>
+            </div>  
+          </div>
+          <div class="image-wrapper">
+            <img src="images/home/pizza-5.jpg" alt="pizza-4">
+            <div class="icon-wrapper">
+              <a class="icon" href="#"><i class="fas fa-heart"></i></a>
+              <a class="icon" href="#"><i class="fas fa-share-alt"></i></a>
+            </div>  
+          </div>
+          <div class="image-wrapper">
+            <img src="images/home/pizza-6.jpg" alt="pizza-4">
+            <div class="icon-wrapper">
+              <a class="icon" href="#"><i class="fas fa-heart"></i></a>
+              <a class="icon" href="#"><i class="fas fa-share-alt"></i></a>
+            </div>  
+          </div>
+        </div>
+        <div class="row">
+          <div class="image-wrapper">
+            <img src="images/home/pizza-7.jpg" alt="pizza-4">
+            <div class="icon-wrapper">
+              <a class="icon" href="#"><i class="fas fa-heart"></i></a>
+              <a class="icon" href="#"><i class="fas fa-share-alt"></i></a>
+            </div>  
+          </div>
+          <div class="image-wrapper">
+            <img src="images/home/pizza-8.jpg" alt="pizza-4">
+            <div class="icon-wrapper">
+              <a class="icon" href="#"><i class="fas fa-heart"></i></a>
+              <a class="icon" href="#"><i class="fas fa-share-alt"></i></a>
+            </div>  
+          </div>
+          <div class="image-wrapper">
+            <img src="images/home/pizza-4.jpg" alt="pizza-9">
+            <div class="icon-wrapper">
+              <a class="icon" href="#"><i class="fas fa-heart"></i></a>
+              <a class="icon" href="#"><i class="fas fa-share-alt"></i></a>
+            </div>  
+          </div>
+        </div>
+        <div class="gallery-link">
+          <a href="#">View more on Instagram</a>  
+        </div> 
+      </section>
+    </div>
+  </div>
+  </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">
@@ -244,6 +364,7 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
   <script src="vendor/range-slider.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="js/app.js" type="module"></script>

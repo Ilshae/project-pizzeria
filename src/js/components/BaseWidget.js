@@ -15,7 +15,6 @@ export class BaseWidget{
   set value(assignedValue){
     const thisWidget = this;
     const newValue = thisWidget.parseValue(assignedValue);
-    
     if(newValue != thisWidget.correctValue && thisWidget.isValid(newValue)){
       thisWidget.correctValue = newValue;    
       thisWidget.announce();
@@ -24,7 +23,7 @@ export class BaseWidget{
   }
 
   parseValue(newValue){
-    return parseInt(newValue);
+    return parseFloat(newValue);
   }
 
   isValid(newValue){

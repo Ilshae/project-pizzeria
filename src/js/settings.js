@@ -106,6 +106,9 @@ export const settings = {
     defaultMin: 1,
     defaultMax: 9,
   },
+  hourWidget: {
+    defaultMin: 0.5,
+  },
   datePicker: {
     maxDaysInFuture: 14,
   },

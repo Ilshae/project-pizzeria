@@ -1,6 +1,7 @@
 import {select, templates, settings, classNames} from '../settings.js';
 import {utils} from '../utils.js';
 import {AmountWidget} from './AmountWidget.js';
+import {HourWidget} from './HourWidget.js';
 import {DatePicker} from './DatePicker.js';
 import {HourPicker} from './HourPicker.js';
 
@@ -14,7 +15,7 @@ export class Booking{
     thisBooking.selectTable();
   }
 
-  render(widgetContainer){
+  render(widgetContainer){ 
     const thisBooking = this;
 
     const generatedHTML = templates.bookingWidget();
@@ -40,7 +41,7 @@ export class Booking{
   initWidgets(){
     const thisBooking = this;
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+    thisBooking.hoursAmount = new HourWidget(thisBooking.dom.hoursAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
@@ -138,7 +139,7 @@ export class Booking{
 
   updateDOM() {
     const thisBooking = this;
-    // console.log('booked', thisBooking.booked);
+    console.log('booked', thisBooking.booked);
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
@@ -170,11 +171,12 @@ export class Booking{
 
   selectTable() {
     const thisBooking = this;
-
     for (let table of thisBooking.dom.tables) { 
       table.addEventListener('click', function () {
         if (!table.classList.contains(classNames.booking.tableBooked)){
           table.classList.toggle(classNames.booking.tableSelected);
+          thisBooking.selectedTable = table;
+          console.log('s', thisBooking.selectedTable);
           thisBooking.blockOverbooking(table);
         }else {
           table.classList.remove(classNames.booking.tableSelected);
@@ -209,6 +211,7 @@ export class Booking{
 
   sendBooking() {
     const thisBooking = this;
+    thisBooking.tableFlag = false;
     
     if(!thisBooking.disabled){
       const url = settings.db.url + '/' + settings.db.booking;
@@ -233,29 +236,34 @@ export class Booking{
       for (let table of thisBooking.dom.tables) {
         const tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
         if (table.classList.contains('selected')) {
+          thisBooking.tableFlag = true;
           payload.table.push(tableId);
           payload.table = parseInt(payload.table);
           table.classList.replace('selected', 'booked');
+          
         }
       }
+      
+      if(thisBooking.tableFlag == true){
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        };
 
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      };
-
-      fetch(url, options)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (parsedResponse) {
-          console.log('parsedResponse', parsedResponse);
-          thisBooking.getData();
-        });
-        
+        fetch(url, options)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (parsedResponse) {
+            console.log('parsedResponse', parsedResponse);
+            thisBooking.getData();
+          });
+      }else{
+        alert('Choose a table.');
+      }       
     }else{
       alert('This table is already booked or booking duration is too long.');
     }

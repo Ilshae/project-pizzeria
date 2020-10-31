@@ -17,7 +17,7 @@ export class AmountWidget extends BaseWidget{
   }
 
   isValid(newValue){
-    return !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax;
+    return !isNaN(newValue) && newValue >= settings.hourWidget.defaultMin && newValue <= settings.amountWidget.defaultMax;
   }
 
   renderValue(){
@@ -34,12 +34,12 @@ export class AmountWidget extends BaseWidget{
     
     thisWidget.dom.linkDecrease.addEventListener('click', function(event){
       event.preventDefault();
-      thisWidget.value = thisWidget.dom.input.value-1;
+      thisWidget.value = thisWidget.dom.input.value-parseFloat(1);
     });
 
     thisWidget.dom.linkIncrease.addEventListener('click', function(event){
       event.preventDefault();
-      thisWidget.value = parseInt(thisWidget.dom.input.value)+parseInt(1);
+      thisWidget.value = parseFloat(thisWidget.dom.input.value)+parseFloat(1);
     });
   }
 }

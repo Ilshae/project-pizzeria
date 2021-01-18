@@ -75,9 +75,6 @@ export class Booking{
       eventsCurrent: settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent,
       eventsRepeat: settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat,
     };
-    
-    //console.log('getData urls', urls);
-    //console.log('getData params', params);
 
     Promise.all([
       fetch(urls.booking),
@@ -139,7 +136,6 @@ export class Booking{
 
   updateDOM() {
     const thisBooking = this;
-    console.log('booked', thisBooking.booked);
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
@@ -176,7 +172,6 @@ export class Booking{
         if (!table.classList.contains(classNames.booking.tableBooked)){
           table.classList.toggle(classNames.booking.tableSelected);
           thisBooking.selectedTable = table;
-          console.log('s', thisBooking.selectedTable);
           thisBooking.blockOverbooking(table);
         }else {
           table.classList.remove(classNames.booking.tableSelected);
@@ -212,7 +207,12 @@ export class Booking{
   sendBooking() {
     const thisBooking = this;
     thisBooking.tableFlag = false;
-    
+
+    if (!thisBooking.dom.inputAddress.value && !thisBooking.dom.inputPhone.value) {
+      thisBooking.disabled = true;
+      alert('Please input address and phone number');
+    }
+
     if(!thisBooking.disabled){
       const url = settings.db.url + '/' + settings.db.booking;
 
@@ -239,8 +239,7 @@ export class Booking{
           thisBooking.tableFlag = true;
           payload.table.push(tableId);
           payload.table = parseInt(payload.table);
-          table.classList.replace('selected', 'booked');
-          
+          table.classList.replace('selected', 'booked'); 
         }
       }
       
@@ -257,15 +256,13 @@ export class Booking{
           .then(function (response) {
             return response.json();
           })
-          .then(function (parsedResponse) {
-            console.log('parsedResponse', parsedResponse);
+          .then(function () {
             thisBooking.getData();
+            alert('Thank you. Your table is booked.');
           });
       }else{
         alert('Choose a table.');
       }       
-    }else{
-      alert('This table is already booked or booking duration is too long.');
     }
   }
   

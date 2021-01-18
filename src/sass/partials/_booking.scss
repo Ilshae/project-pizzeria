@@ -210,3 +210,48 @@
   @include flex(row, flex-start, space-between);
   margin: ($base-size * 4) auto;
 }
+
+@media (max-width: 600px) {
+  .booking-widget {
+    h2 {
+      margin: 0;
+    }
+  }
+  .booking-form, .time-picker, .booking-options, .order-confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .booking-option-title {
+    margin: $base-size;
+    text-align: center;
+  }
+
+  .date-option{
+    margin-bottom: ($base-size / 2);
+  }
+
+  .time-picker {
+    .hour-picker {
+      .output {
+        top: 35px;
+        left: 42%;
+      }
+    }
+  }
+
+  .floor-plan {
+    margin: $base-size 0;
+  }
+
+  .booking-options {
+    margin: ($base-size * 2) 0;
+  }
+
+  .order-confirmation > input, .order-confirmation > button {
+    margin-top: $base-size;
+  }
+}

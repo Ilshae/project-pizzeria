@@ -47,8 +47,4 @@ export class DatePicker extends BaseWidget{
   isValid(){
     return true;
   }
-
-  renderValue(){
-    console.log('renderValue()');
-  }
 }

@@ -15,8 +15,6 @@ export class CartProduct{
     thisCartProduct.getElements(element);
     thisCartProduct.initAmountWidget();
     thisCartProduct.initActions();
-    //console.log('new CartProduct', thisCartProduct);
-    //console.log('productData', menuProduct);
   }
 
   getElements(element){

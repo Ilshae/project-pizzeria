@@ -44,9 +44,11 @@
   .logo {
     display: block;
     text-align: center;
+
     &__title {
       font-size: ($base-size * 3);
     }
+
     &__subtitle {
       font-size: ($base-size * 1.3);
     }
@@ -81,6 +83,7 @@
       margin-right: $base-size;
       padding: $base-size!important;
     }
+
     a:last-of-type{
       margin: 0;
     }

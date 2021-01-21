@@ -135,11 +135,13 @@
     &__order {
       width: 180px;
     }
+
     &__images {
       img {
         width: 250px;
         height: 250px;
       }
+
       &.small {
         img {
           width: 140px;
@@ -170,6 +172,7 @@
     &__header {
       margin-bottom: $base-size;
     }
+
     &__name {
       font-size: ($base-size * 1.5);
     }
